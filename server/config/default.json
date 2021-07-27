@@ -1,0 +1,4 @@
+{
+  "PORT": "8000",
+  "mongoURI": "mongodb+srv://alice:todoapp@cluster0.lfgci.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+}
