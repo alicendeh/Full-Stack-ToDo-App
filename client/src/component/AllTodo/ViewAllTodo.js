@@ -1,5 +1,5 @@
 //import liraries
-import React, { Component, useContext } from 'react';
+import React, { Component, useContext, useEffect } from 'react';
 import {
   View,
   Text,
@@ -15,6 +15,11 @@ import List from './List';
 const MyComponent = ({ navigation }) => {
   const todoContext = useContext(TodoContext);
   const { todo } = todoContext;
+
+  useEffect(() => {
+    console.log(todo);
+  }, [todoContext.todo]);
+
   return (
     <View style={styles.container}>
       <View style={styles.main}>
@@ -34,7 +39,7 @@ const MyComponent = ({ navigation }) => {
           <TextInput placeholder="Search" />
         </View>
       </View>
-      <List />
+      <List navigation={navigation} />
     </View>
   );
 };

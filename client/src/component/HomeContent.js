@@ -14,6 +14,7 @@ import {
   MaterialCommunityIcons,
   EvilIcons,
   AntDesign,
+  Entypo,
 } from 'react-native-vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 // create a component
@@ -73,7 +74,34 @@ const Home = ({ navigation }) => {
             </View>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.view3R1}>
+
+        <TouchableOpacity
+          style={styles.view3R1}
+          onPress={() => navigation.navigate('Bookmarks')}
+        >
+          <View
+            style={[
+              styles.view3R1Icon1,
+              {
+                backgroundColor: '#9A3535',
+              },
+            ]}
+          >
+            <Entypo name="bookmarks" size={21} color="white" />
+          </View>
+          <View style={styles.view3R1Cont2}>
+            <Text style={styles.view3R1Cont2txt}>Bookmarks</Text>
+            <View style={styles.view3R1Cont2a}>
+              <Text>0</Text>
+              <Icon name="chevron-right" size={31} color="#BDBDBD" />
+            </View>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.view3R1}
+          onPress={() => navigation.navigate('Trash')}
+        >
           <View style={styles.view3R1Icon12}>
             <EvilIcons name="trash" size={27} color="white" />
           </View>

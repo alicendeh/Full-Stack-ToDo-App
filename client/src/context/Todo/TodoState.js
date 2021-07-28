@@ -5,7 +5,7 @@ import TodoReducer from './TodoReducer';
 
 const TodoState = (props) => {
   const initialState = {
-    Todos: [
+    todo: [
       {
         id: 1,
         title: 'Christian Duty',
@@ -26,10 +26,17 @@ const TodoState = (props) => {
     ],
   };
   const [state, dispatch] = useReducer(TodoReducer, initialState);
+  const addTodo = (data) => {
+    dispatch({
+      type: 'ADD_TODO',
+      payload: data,
+    });
+  };
   return (
     <TodoContext.Provider
       value={{
-        todo: state.Todos,
+        todo: state.todo,
+        addTodo,
       }}
     >
       {props.children}
