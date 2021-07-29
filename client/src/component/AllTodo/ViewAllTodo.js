@@ -1,5 +1,5 @@
 //import liraries
-import React, { Component, useContext, useEffect } from 'react';
+import React, { Component, useContext, useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -10,27 +10,38 @@ import {
 import TodoContext from '../../context/Todo/TodoContext';
 import { Entypo, EvilIcons, Ionicons } from 'react-native-vector-icons';
 import List from './List';
-
+import RTopTab from '../RTopTab';
 // create a component
 const MyComponent = ({ navigation }) => {
   const todoContext = useContext(TodoContext);
   const { todo } = todoContext;
 
-  useEffect(() => {
-    console.log(todo);
-  }, [todoContext.todo]);
+  const [toggle, setToggle] = useState(false);
+  const [rey, setrey] = useState(true);
 
+  const onChangeUI = () => {
+    setToggle(!toggle);
+    setrey(!rey);
+    if (toggle === true) {
+      let newArray = todo.map((item, index) => {
+        item.selection = false;
+        return { ...item };
+      });
+    }
+  };
   return (
     <View style={styles.container}>
       <View style={styles.main}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.main1}
-        >
-          <Entypo name="chevron-left" size={32} color="#4287F7" />
-          <Text style={styles.txt}>Home</Text>
+        <RTopTab name="Home" navigation={navigation} />
+        <TouchableOpacity onPress={onChangeUI}>
+          {toggle ? (
+            <View>
+              <Text style={styles.Edit}>Cancel</Text>
+            </View>
+          ) : (
+            <Text style={styles.Edit}>Edit</Text>
+          )}
         </TouchableOpacity>
-        <Text style={styles.Edit}>Edit</Text>
       </View>
       <View>
         <Text style={styles.txt1}>All Your Todo Items</Text>
@@ -39,7 +50,7 @@ const MyComponent = ({ navigation }) => {
           <TextInput placeholder="Search" />
         </View>
       </View>
-      <List navigation={navigation} />
+      <List navigation={navigation} toggle={toggle} rey={rey} />
     </View>
   );
 };
@@ -57,15 +68,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingVertical: 7,
   },
-  main1: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  txt: {
-    fontSize: 18,
-    color: '#4287F7',
-  },
+
   Edit: {
     fontSize: 18,
     color: '#4287F7',

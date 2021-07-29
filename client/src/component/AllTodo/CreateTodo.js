@@ -25,6 +25,9 @@ const MyComponent = ({ navigation }) => {
     body: '',
   });
   const { title, body } = data;
+  let newTitle = title.replace(/\s/g, '');
+  let newBody = body.replace(/\s/g, '');
+
   const DismissKeyboard = ({ children }) => (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       {children}
@@ -52,7 +55,7 @@ const MyComponent = ({ navigation }) => {
             alignItems: 'center',
             justifyContent: 'center',
             backgroundColor:
-              title.length > 1 && body.length > 1 ? 'blue' : '#ddd',
+              newTitle.length > 0 && newBody.length > 0 ? 'blue' : '#ddd',
             width: 40,
             height: 40,
             borderRadius: 40,
