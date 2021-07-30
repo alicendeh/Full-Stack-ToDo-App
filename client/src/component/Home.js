@@ -8,6 +8,8 @@ import AllTodoContent from './AllTodo/ViewAllTodo';
 import CreateTodo from './AllTodo/CreateTodo';
 import Bookmarks from './Bookmarkks';
 import Trash from './Trash';
+import Register from '../component/Auth/Register';
+import Login from '../component/Auth/Login';
 
 const Stack = createStackNavigator();
 
@@ -16,6 +18,20 @@ function MyStack() {
     <Stack.Navigator screenOptions={{}}>
       <Stack.Screen
         name="Home"
+        component={Register}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Login"
+        component={Login}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="HomePage"
         component={HomeContent}
         options={{
           headerShown: false,

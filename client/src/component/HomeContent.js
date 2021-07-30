@@ -7,7 +7,6 @@ import {
   Image,
   TouchableOpacity,
   Switch,
-  StatusBar,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
 import {
@@ -17,6 +16,7 @@ import {
   Entypo,
 } from 'react-native-vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
+import { StatusBar } from 'expo-status-bar';
 // create a component
 
 const Home = ({ navigation }) => {
@@ -25,6 +25,7 @@ const Home = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <StatusBar style={'dark'} />
       <View style={styles.view1}>
         <View style={styles.imgDiv}>
           {/* <Image
@@ -157,6 +158,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F2F2F7',
+    marginVertical: 45,
   },
   view1: {
     height: 120,

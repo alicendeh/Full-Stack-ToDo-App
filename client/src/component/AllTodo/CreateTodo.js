@@ -28,11 +28,6 @@ const MyComponent = ({ navigation }) => {
   let newTitle = title.replace(/\s/g, '');
   let newBody = body.replace(/\s/g, '');
 
-  const DismissKeyboard = ({ children }) => (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      {children}
-    </TouchableWithoutFeedback>
-  );
   const send = () => {
     addTodo(data);
     navigation.goBack();
