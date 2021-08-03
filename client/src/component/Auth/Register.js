@@ -1,5 +1,5 @@
 //import liraries
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useContext, useEffect } from 'react';
 import {
   View,
   Text,
@@ -10,13 +10,25 @@ import {
 } from 'react-native';
 import { Entypo } from 'react-native-vector-icons';
 import { StatusBar } from 'expo-status-bar';
+import AuthContext from '../../context/Auth/AuthContext';
+
 // create a component
 const MyComponent = ({ navigation }) => {
+  const authContext = useContext(AuthContext);
+  const { registerUser, isAuthenticated } = authContext;
+
   const [pwd, setPwd] = useState(true);
   const togglePwd = () => {
     setPwd(!pwd);
   };
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigation.navigate('HomePage');
+    } else {
+      console.log('login first please');
+    }
+  }, [authContext]);
   const [authData, setauthData] = useState({
     name: '',
     email: '',
@@ -24,8 +36,9 @@ const MyComponent = ({ navigation }) => {
   });
   const { name, email, password } = authData;
 
-  const onRegister = () => {
-    console.log(authData);
+  const onRegister = async () => {
+    registerUser(authData);
+    // await AsyncStorage.setItem('name', JSON.stringify(name));
   };
 
   return (

@@ -1,5 +1,5 @@
 //import liraries
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useContext } from 'react';
 import {
   View,
   Text,
@@ -9,14 +9,27 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-
 import { Entypo } from 'react-native-vector-icons';
+import AuthContext from '../../context/Auth/AuthContext';
 
 // create a component
-const MyComponent = ({ navigation }) => {
+const Login = ({ navigation }) => {
+  const authContext = useContext(AuthContext);
+  const { loginUser } = authContext;
+
   const [pwd, setPwd] = useState(true);
   const togglePwd = () => {
     setPwd(!pwd);
+  };
+
+  const [userData, setuserData] = useState({
+    email: '',
+    password: '',
+  });
+  const { email, password } = userData;
+
+  const onLogin = () => {
+    loginUser(userData);
   };
   return (
     <View style={styles.container}>
@@ -33,7 +46,12 @@ const MyComponent = ({ navigation }) => {
           <Text style={styles.text12}>Email</Text>
           <View style={styles.ano}>
             <Entypo name="lock" size={26} color="#ccc" />
-            <TextInput style={styles.input} placeholder="Your Email" />
+            <TextInput
+              style={styles.input}
+              placeholder="Your Email"
+              value={email}
+              onChangeText={(txt) => setuserData({ ...userData, email: txt })}
+            />
           </View>
         </View>
         <View style={styles.pwd}>
@@ -45,6 +63,10 @@ const MyComponent = ({ navigation }) => {
                 style={styles.inputItem}
                 secureTextEntry={pwd ? true : false}
                 placeholder="Your Password"
+                value={password}
+                onChangeText={(txt) =>
+                  setuserData({ ...userData, password: txt })
+                }
               />
               <TouchableOpacity onPress={togglePwd}>
                 <Entypo
@@ -57,7 +79,7 @@ const MyComponent = ({ navigation }) => {
           </View>
         </View>
         <View>
-          <TouchableOpacity style={styles.sginin}>
+          <TouchableOpacity style={styles.sginin} onPress={onLogin}>
             <Text style={styles.sginintxt}>Sign In</Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -152,4 +174,4 @@ const styles = StyleSheet.create({
 });
 
 //make this component available to the app
-export default MyComponent;
+export default Login;

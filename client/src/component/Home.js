@@ -28,6 +28,7 @@ function MyStack() {
         component={Login}
         options={{
           headerShown: false,
+          gestureEnabled: false,
         }}
       />
       <Stack.Screen
@@ -35,6 +36,7 @@ function MyStack() {
         component={HomeContent}
         options={{
           headerShown: false,
+          gestureEnabled: false,
         }}
       />
       <Stack.Screen

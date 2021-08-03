@@ -2,7 +2,7 @@ import React, { useContext, useReducer } from 'react';
 import { SafeAreaView } from 'react-native';
 import TodoContext from './TodoContext';
 import TodoReducer from './TodoReducer';
-import apiClient from '../Api';
+import ApiCall from '../ApiCall';
 
 const TodoState = (props) => {
   const initialState = {
@@ -33,6 +33,7 @@ const TodoState = (props) => {
       payload: data,
     });
   };
+
   return (
     <TodoContext.Provider
       value={{

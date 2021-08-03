@@ -1,13 +1,10 @@
+// import AsyncStorage from '@react-native-community/async-storage';
+
 export default (state, action) => {
-  switch (action.type) {
-    default:
-      return state;
-    case 'ADD_TODO':
-      return {
-        ...state,
-        todo: [action.payload, ...state.todo],
-      };
+  const { type, payload } = action;
+  switch (type) {
     case 'USER_REGISTER':
+    case 'USER_LOGIN':
       return {
         ...state,
         ...payload,

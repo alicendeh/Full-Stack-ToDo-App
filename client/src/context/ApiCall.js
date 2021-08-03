@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export default axios.create({
-  baseURL: 'http://192.168.0.101:8000/api/todo',
+  baseURL: 'http://172.20.10.3:8000',
 });

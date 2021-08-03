@@ -4,17 +4,15 @@ import {
   View,
   Text,
   StyleSheet,
-  StatusBar,
   Modal,
   TouchableOpacity,
   TouchableWithoutFeedback,
   TextInput,
-  Keyboard,
   ScrollView,
 } from 'react-native';
 import { AntDesign } from 'react-native-vector-icons';
 import TodoContext from '../../context/Todo/TodoContext';
-
+import { StatusBar } from 'expo-status-bar';
 // create a component
 const MyComponent = ({ navigation }) => {
   const todoContext = useContext(TodoContext);
@@ -34,6 +32,7 @@ const MyComponent = ({ navigation }) => {
   };
   return (
     <ScrollView keyboardShouldPersistTaps="handled" style={styles.container}>
+      <StatusBar style={'light'} />
       <View style={styles.main}>
         <View style={styles.line}></View>
       </View>

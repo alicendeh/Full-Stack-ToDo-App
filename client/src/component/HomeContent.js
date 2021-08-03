@@ -1,5 +1,5 @@
 //import liraries
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -22,6 +22,12 @@ import { StatusBar } from 'expo-status-bar';
 const Home = ({ navigation }) => {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+
+  // const getName = async () => {
+  //   let res = await AsyncStorage.getItem('name');
+  //   console.log(res);
+  //   console.log('name');
+  // };
 
   return (
     <View style={styles.container}>
