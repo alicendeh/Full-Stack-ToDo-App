@@ -11,11 +11,12 @@ import {
 import { Entypo } from 'react-native-vector-icons';
 import { StatusBar } from 'expo-status-bar';
 import AuthContext from '../../context/Auth/AuthContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // create a component
 const MyComponent = ({ navigation }) => {
   const authContext = useContext(AuthContext);
-  const { registerUser, isAuthenticated } = authContext;
+  const { registerUser, isAuthenticated, token } = authContext;
 
   const [pwd, setPwd] = useState(true);
   const togglePwd = () => {

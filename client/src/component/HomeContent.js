@@ -1,5 +1,5 @@
 //import liraries
-import React, { Component, useState, useEffect } from 'react';
+import React, { Component, useState, useEffect, useContext } from 'react';
 import {
   View,
   Text,
@@ -17,18 +17,48 @@ import {
 } from 'react-native-vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import AuthContext from '../context/Auth/AuthContext';
+
 // create a component
 
 const Home = ({ navigation }) => {
+  const authContext = useContext(AuthContext);
+  const {
+    token,
+    isAuthenticated,
+    loadUser,
+    user,
+    storeToken,
+    onLogout,
+  } = authContext;
+
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
-  // const getName = async () => {
-  //   let res = await AsyncStorage.getItem('name');
-  //   console.log(res);
-  //   console.log('name');
-  // };
+  const theFun = async () => {
+    try {
+      let data = await AsyncStorage.getItem('token');
+      await storeToken(data);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
+  useEffect(() => {
+    loadUser();
+    theFun();
+  }, []);
+  useEffect(() => {
+    if (isAuthenticated === false) {
+      navigation.navigate('Login');
+    }
+  }, [authContext]);
+
+  //logout
+  const Logout = () => {
+    onLogout();
+  };
   return (
     <View style={styles.container}>
       <StatusBar style={'dark'} />
@@ -53,7 +83,7 @@ const Home = ({ navigation }) => {
               }}
             />
             <View style={styles.view2R1Txt}>
-              <Text style={styles.view2R1TxtM}> Alice Ndeh </Text>
+              <Text style={styles.view2R1TxtM}> {user && user.name} </Text>
             </View>
           </View>
         </View>
@@ -64,7 +94,9 @@ const Home = ({ navigation }) => {
       <View style={styles.view3}>
         <TouchableOpacity
           style={styles.view3R1}
-          onPress={() => navigation.navigate('AllTodoContent')}
+          onPress={() => {
+            navigation.navigate('AllTodoContent');
+          }}
         >
           <View style={styles.view3R1Icon1}>
             <MaterialCommunityIcons
@@ -143,7 +175,7 @@ const Home = ({ navigation }) => {
             </View>
           </View>
         </View>
-        <TouchableOpacity style={styles.view3R1}>
+        <TouchableOpacity style={styles.view3R1} onPress={Logout}>
           <View style={styles.logout}>
             <AntDesign name="logout" size={21} color="white" />
           </View>

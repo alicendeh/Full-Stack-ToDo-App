@@ -35,7 +35,7 @@ route.post('/', async (req, res) => {
   }
 });
 
-//ediit user info
+//edit user info
 route.post('/', Auth, async (req, res) => {
   try {
     let user = await User.findByIdAndUpdate(req.user.id, req.body, {
@@ -51,4 +51,17 @@ route.post('/', Auth, async (req, res) => {
     res.status('500').json({ msg: 'Server Error' });
   }
 });
+
+// @desc      Get logged in user
+// @access    Private
+route.get('/loadUser', Auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select('-password');
+    res.json(user);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 module.exports = route;

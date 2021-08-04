@@ -1,5 +1,5 @@
 //import liraries
-import React, { Component, useState, useContext } from 'react';
+import React, { Component, useState, useContext, useEffect } from 'react';
 import {
   View,
   Text,
@@ -11,11 +11,12 @@ import {
 import { StatusBar } from 'expo-status-bar';
 import { Entypo } from 'react-native-vector-icons';
 import AuthContext from '../../context/Auth/AuthContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // create a component
 const Login = ({ navigation }) => {
   const authContext = useContext(AuthContext);
-  const { loginUser } = authContext;
+  const { loginUser, token } = authContext;
 
   const [pwd, setPwd] = useState(true);
   const togglePwd = () => {
@@ -23,14 +24,16 @@ const Login = ({ navigation }) => {
   };
 
   const [userData, setuserData] = useState({
-    email: '',
-    password: '',
+    email: 'alicendeh16@gmail.com',
+    password: 'alice123',
   });
   const { email, password } = userData;
 
-  const onLogin = () => {
+  const onLogin = async () => {
     loginUser(userData);
+    // console.log(token);
   };
+
   return (
     <View style={styles.container}>
       <View style={styles.main}>

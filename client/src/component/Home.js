@@ -10,15 +10,21 @@ import Bookmarks from './Bookmarkks';
 import Trash from './Trash';
 import Register from '../component/Auth/Register';
 import Login from '../component/Auth/Login';
+import AuthContext from '../context/Auth/AuthContext';
 
 const Stack = createStackNavigator();
 
 function MyStack() {
+  const authContext = useContext(AuthContext);
+  const { user, isAuthenticated, token } = authContext;
   return (
     <Stack.Navigator screenOptions={{}}>
       <Stack.Screen
         name="Home"
-        component={Register}
+        component={
+          Register
+          // token ? HomeContent : Register
+        }
         options={{
           headerShown: false,
         }}
